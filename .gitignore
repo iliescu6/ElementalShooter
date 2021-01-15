@@ -1,9 +1,9 @@
 # =============== #
 # Unity generated #
 # =============== #
-DiceHeroes/Temp/
-DiceHeroes/Library/
-DiceHeroes/Logs/
+ElementalShooter/Temp/
+ElementalShooter/Library/
+ElementalShooter/Logs/
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -12,7 +12,7 @@ ExportedObj/
 obj/
 *.svd
 *.userprefs
-DiceHeroes/*.csproj
+ElementalShooter/*.csproj
 *.pidb
 *.suo
 *.sln
