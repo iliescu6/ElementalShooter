@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] Rigidbody body;
+    [SerializeField] Rigidbody2D body;
+    [SerializeField] public SpriteRenderer bulletSprite;//TODO delete after prototype
     [SerializeField] float speed;
     [SerializeField] float damage;
 
-    // Update is called once per frame
     void Update()
     {
-        body.velocity = transform.up * speed;
+        body.velocity = new Vector2(0,1) * 5;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
-            BasicEnemy be = other.gameObject.GetComponent<BasicEnemy>();
+            BasicEnemy be = collision.gameObject.GetComponent<BasicEnemy>();
             be.LoseHealth(damage);
             Destroy(gameObject);
         }
+
+        if (collision.gameObject.tag == "BulletBarrier")
+        {
+            Destroy(gameObject);
+        }
     }
+
 }
