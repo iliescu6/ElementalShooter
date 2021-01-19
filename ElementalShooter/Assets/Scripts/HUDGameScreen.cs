@@ -12,8 +12,7 @@ public class HUDGameScreen : MonoBehaviour
     [SerializeField] EnemySpawnerController enemySontroller;
 
     public int score;
-    float difficultyTimer;
-    int difficultyLevel;
+    
     private void Awake()
     {
         Instance = this;
@@ -22,9 +21,10 @@ public class HUDGameScreen : MonoBehaviour
 
     private void Update()
     {
-        difficultyTimer += Time.deltaTime;
-        debugText.text = difficultyTimer.ToString();
+        debugText.text = enemySontroller.difficultyTimer.ToString();
     }
+
+    
 
     public void AddToScore(int value)
     {
