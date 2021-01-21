@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUDGameScreen : MonoBehaviour
 {
     public static HUDGameScreen Instance;
+    [SerializeField] Image bossHealth;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text debugText;
     [SerializeField] PlayerProfile spaceship;
@@ -24,8 +26,14 @@ public class HUDGameScreen : MonoBehaviour
         debugText.text = enemySontroller.difficultyTimer.ToString();
     }
 
-    
 
+    public void UpdateLifeBar(float percentage)
+    {
+        if (bossHealth.gameObject.activeInHierarchy)
+        {
+            bossHealth.fillAmount = percentage;
+        }
+    }
     public void AddToScore(int value)
     {
         score += value;

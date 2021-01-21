@@ -15,6 +15,7 @@ public class EnemySpawnerController : MonoBehaviour
     int remainingEnemies;
     float spawnTimer = 0;
     public bool waveDefeated = false;
+    public bool bossDefeated = false;
     public float difficultyTimer;
     int difficultyLevel;
 
@@ -61,6 +62,11 @@ public class EnemySpawnerController : MonoBehaviour
             }
         }
         remainingEnemies = 5 * 5;
+    }
+
+    void SpawnRandomBoss()
+    {
+
     }
 
     void RemoveEnemyFromWave()

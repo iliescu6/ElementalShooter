@@ -5,22 +5,26 @@ using UnityEngine.Events;
 
 public class BasicEnemy : MonoBehaviour
 {
-    [SerializeField] float health;
-    [SerializeField] GameObject bullet;
-    [SerializeField] float speed;
+    [SerializeField] public float maxHealth;
+    [SerializeField] public float currentHealth;
+    [SerializeField] public Transform bulletSpawnPoint;
+    [SerializeField] public Bullet bullet;
+    [SerializeField] public float speed;
     [SerializeField] public Rigidbody2D body;
     public UnityEvent OnDeath;
 
-    private void Awake()
+    public virtual void Awake()
     {
+        currentHealth = maxHealth;
         body.velocity=transform.up*speed;
     }
 
 
     public void LoseHealth(float bulletDamage)
     {
-        health -= bulletDamage;
-        if (health <= 0)
+        currentHealth -= bulletDamage;
+        HUDGameScreen.Instance.UpdateLifeBar(currentHealth/maxHealth);
+        if (currentHealth <= 0)
         {
             OnDeath.Invoke();
             OnDeath.RemoveAllListeners();
@@ -29,11 +33,16 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyBarrier")
         {
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator BasicMovement()
+    {
+        yield return new WaitForSeconds(1);
     }
 }
