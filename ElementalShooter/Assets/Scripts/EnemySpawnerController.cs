@@ -18,37 +18,43 @@ public class EnemySpawnerController : MonoBehaviour
     public bool waveDefeated = false;
     public bool bossDefeated = false;
     public float difficultyTimer;
+    public float spawnNewWaveTime;
     int difficultyLevel;
 
     private void Start()
     {
-        //StartCoroutine(StarGame());
-        MakeRandomWave();
+        StartCoroutine(StarGame());
+        //MakeRandomWave();
     }
     private void Update()
     {
         difficultyTimer += Time.deltaTime;
         
     }
-    //IEnumerator StarGame()
-    //{
-        //yield return new WaitForSeconds(timeBetweenSpawn);
-        //while (!waveDefeated)
-        //{
-        //    //Spawns one random object
-        //    Vector3 newSpanPoint = new Vector3(Random.Range(-spawningPoint.position.x, spawningPoint.position.x), spawningPoint.position.y, spawningPoint.position.z);
-        //    Instantiate(hazard, newSpanPoint, Quaternion.identity);
-        //    if (difficultyTimer > 5)
-        //    {
-        //        MakeRandomWave();
-        //    }
-        //    while (remainingEnemies > 0)
-        //    {
-        //        yield return new WaitForSeconds(1);
-        //    }
-        //    yield return new WaitForSeconds(timeBetweenSpawn);
-        //}
-   // }
+    IEnumerator StarGame()
+    {
+        yield return new WaitForSeconds(timeBetweenSpawn);
+        while (!bossDefeated)
+        {
+            //Spawns one random object
+            Vector3 newSpanPoint = new Vector3(Random.Range(-spawningPoint.position.x, spawningPoint.position.x), spawningPoint.position.y, spawningPoint.position.z);
+            BasicEnemy enemy= Instantiate(hazard, newSpanPoint, Quaternion.identity);
+            enemy.SetSpeed();
+            if (difficultyTimer > spawnNewWaveTime)
+            {
+                while (remainingEnemies > 0)
+                {
+                    yield return new WaitForSeconds(.25f);
+                }
+                MakeRandomWave();
+            }
+            while (remainingEnemies > 0)
+            {
+                yield return new WaitForSeconds(1);
+            }
+            yield return new WaitForSeconds(timeBetweenSpawn);
+        }
+    }
 
 
     void CreateBasicWave()
@@ -82,5 +88,10 @@ public class EnemySpawnerController : MonoBehaviour
     void RemoveEnemyFromWave()
     {
         remainingEnemies--;
+        HUDGameScreen.Instance.debugEnemiesLeft = remainingEnemies;
+        if (remainingEnemies == 0)
+        {
+            spawnNewWaveTime = difficultyTimer + 10;
+        }
     }
 }

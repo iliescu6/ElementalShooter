@@ -2288,7 +2288,8 @@ MonoBehaviour:
   scoreText: {fileID: 861390142}
   debugText: {fileID: 510388182}
   spaceship: {fileID: 0}
-  enemySontroller: {fileID: 971394821}
+  enemyController: {fileID: 971394821}
+  debugEnemiesLeft: 0
   score: 0
 --- !u!1 &1518760011
 GameObject:

@@ -34,7 +34,7 @@ public class FollowThePath : MonoBehaviour {
 
     private void Update()
     {
-        if (movingIsActive)
+        if (movingIsActive && pathPositions!=null)
         {
             currentPathPercent += speed / 100 * Time.deltaTime;     //every update calculating current path percentage according to the defined speed
 

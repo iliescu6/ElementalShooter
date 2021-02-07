@@ -41,6 +41,11 @@ public class BasicEnemy : MonoBehaviour
         //}
     }
 
+    public void SetSpeed()
+    {
+        body.velocity = transform.up * speed;
+    }
+
     public void LoseHealth(float bulletDamage)
     {
         currentHealth -= bulletDamage;

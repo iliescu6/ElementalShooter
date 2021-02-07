@@ -11,7 +11,8 @@ public class HUDGameScreen : MonoBehaviour
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text debugText;
     [SerializeField] PlayerProfile spaceship;
-    [SerializeField] EnemySpawnerController enemySontroller;
+    [SerializeField] EnemySpawnerController enemyController;
+    public int debugEnemiesLeft = 0;
 
     public int score;
     
@@ -23,7 +24,7 @@ public class HUDGameScreen : MonoBehaviour
 
     private void Update()
     {
-        debugText.text = enemySontroller.difficultyTimer.ToString();
+        debugText.text = enemyController.difficultyTimer.ToString() + "\n"+ debugEnemiesLeft;
     }
 
 
