@@ -11,14 +11,35 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] public Bullet bullet;
     [SerializeField] public float speed;
     [SerializeField] public Rigidbody2D body;
+    private Vector2 currentPoint;
+    int index = 0;
     public UnityEvent OnDeath;
 
     public virtual void Awake()
     {
         currentHealth = maxHealth;
-        body.velocity=transform.up*speed;
+        //body.velocity=transform.up*speed;
     }
 
+    public void Start()
+    {
+       // currentPoint = pathCreator.path.points[0];
+    }
+    private void Update()
+    {
+        //if (Vector2.Distance(transform.position, currentPoint) < 0.2)
+        //{
+        //    //if (index + 1 < pathCreator.path.points.Count)
+        //    //{
+        //    //    index++;
+        //    //}
+        //    //currentPoint = pathCreator.path.points[index];
+        //}
+        //else
+        //{
+        //    transform.position=Vector2.MoveTowards(transform.position, currentPoint, 1*Time.deltaTime);
+        //}
+    }
 
     public void LoseHealth(float bulletDamage)
     {
