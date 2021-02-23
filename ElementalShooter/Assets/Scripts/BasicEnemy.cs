@@ -5,22 +5,52 @@ using UnityEngine.Events;
 
 public class BasicEnemy : MonoBehaviour
 {
-    [SerializeField] float health;
-    [SerializeField] GameObject bullet;
-    [SerializeField] float speed;
+    [SerializeField] public float maxHealth;
+    [SerializeField] public float currentHealth;
+    [SerializeField] public Transform bulletSpawnPoint;
+    [SerializeField] public Bullet bullet;
+    [SerializeField] public float speed;
     [SerializeField] public Rigidbody2D body;
+    private Vector2 currentPoint;
+    int index = 0;
     public UnityEvent OnDeath;
 
-    private void Awake()
+    public virtual void Awake()
     {
-        body.velocity=transform.up*speed;
+        currentHealth = maxHealth;
+        //body.velocity=transform.up*speed;
     }
 
+    public void Start()
+    {
+       // currentPoint = pathCreator.path.points[0];
+    }
+    private void Update()
+    {
+        //if (Vector2.Distance(transform.position, currentPoint) < 0.2)
+        //{
+        //    //if (index + 1 < pathCreator.path.points.Count)
+        //    //{
+        //    //    index++;
+        //    //}
+        //    //currentPoint = pathCreator.path.points[index];
+        //}
+        //else
+        //{
+        //    transform.position=Vector2.MoveTowards(transform.position, currentPoint, 1*Time.deltaTime);
+        //}
+    }
+
+    public void SetSpeed()
+    {
+        body.velocity = transform.up * speed;
+    }
 
     public void LoseHealth(float bulletDamage)
     {
-        health -= bulletDamage;
-        if (health <= 0)
+        currentHealth -= bulletDamage;
+        HUDGameScreen.Instance.UpdateLifeBar(currentHealth/maxHealth);
+        if (currentHealth <= 0)
         {
             OnDeath.Invoke();
             OnDeath.RemoveAllListeners();
@@ -29,11 +59,16 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "EnemyBarrier")
         {
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator BasicMovement()
+    {
+        yield return new WaitForSeconds(1);
     }
 }

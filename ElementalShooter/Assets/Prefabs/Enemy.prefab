@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4932660011328749637}
   - component: {fileID: 4932660011328749638}
   - component: {fileID: 4932660011328749639}
+  - component: {fileID: -3216758511133675871}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4932660011328749640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.42, y: 19.29, z: 43.65}
   m_LocalScale: {x: 0.09, y: 0.09, z: 0.09}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,10 +97,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30306188a3a3fbf4fbf7649e82c7d510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  maxHealth: 5
+  currentHealth: 0
+  bulletSpawnPoint: {fileID: 0}
   bullet: {fileID: 0}
   speed: -1
   body: {fileID: 4932660011328749639}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!58 &4932660011328749638
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -137,3 +143,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-3216758511133675871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4932660011328749640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb55924fc8ef444409698fed6ae69676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  speed: 5
+  rotationByPath: 0
+  loop: 0
+  movingIsActive: 1

@@ -33,7 +33,7 @@ public class PlayerProfile : MonoBehaviour
             {
                 GameObject g=Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
                 Bullet b = g.GetComponent<Bullet>();
-
+                b.SetOwner("Player");
                 switch (currentElement)
                 {
                     case ElementalWeapon.Fire:
@@ -82,6 +82,11 @@ public class PlayerProfile : MonoBehaviour
                 Debug.LogError("U fucked up the element");
                 break;
         }
+    }
+
+    public void TakeDamage()
+    {
+        Debug.Log("PLayer got hit");
     }
 }
 
